@@ -1,0 +1,65 @@
+.product-grid {
+  display: grid;
+  // Esto crea columnas que miden MÍNIMO 300px. 
+  // Si la pantalla es chica, las apila. Si es grande, pone varias lado a lado.
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%; // Para que todas las tarjetas tengan la misma altura si están en la misma fila
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); // Un poco de sombra para que se destaque
+  
+  // --- AQUÍ ESTÁ EL ARREGLO DE LA IMAGEN ---
+  img[mat-card-image] {
+    width: 100%;       // Que ocupe el ancho de la tarjeta
+    height: 200px;     // Altura FIJA (puedes cambiar a 250px si prefieres)
+    object-fit: cover; // "Recorta" la imagen para llenar el espacio sin estirarse
+    object-position: top center; // Centra la imagen priorizando la parte de arriba
+    margin: 0;         // Elimina márgenes extraños de Material
+  }
+
+  mat-card-header {
+    margin-bottom: 10px;
+  }
+
+  mat-card-content {
+    flex-grow: 1; // Esto empuja los botones hacia el fondo de la tarjeta
+    padding-top: 16px;
+
+    .product-title {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      display: block;
+      text-decoration: none;
+      color: #333;
+      
+      &:hover {
+        color: #3f51b5; // Color primary al pasar el mouse
+      }
+    }
+
+    .product-price {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #2e7d32; // Un verde para el precio
+      margin-bottom: 4px;
+    }
+
+    .product-stock {
+      font-size: 0.9rem;
+      color: #666;
+    }
+  }
+
+  mat-card-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    border-top: 1px solid #eee; // Una línea sutil separando los botones
+  }
+}

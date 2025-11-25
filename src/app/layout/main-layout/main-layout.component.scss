@@ -1,0 +1,35 @@
+// :host hace referencia al propio componente <app-main-layout>
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; // Ocupar mínimo el 100% de la altura de la ventana
+}
+
+// El navbar ya tiene sus estilos, no hace falta tocarlos...
+
+// ESTA ES LA CLAVE:
+main {
+  flex: 1; // Esto le dice al <main>: "Crecé todo lo que puedas para ocupar el espacio vacío"
+  padding: 20px; // (Manteniendo tu padding original)
+}
+
+// El footer se queda igual, pero ahora será empujado al fondo
+footer {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin-top: auto; // Asegura que se pegue al fondo si flex falla en algún navegador viejo
+}
+
+// ... (mantené tus estilos de .spacer y .navbar-brand)
+.spacer {
+  flex: 1 1 auto;
+}
+
+.navbar-brand {
+  text-decoration: none;
+  color: white;
+  font-size: 1.25rem;
+  margin-right: 20px;
+}

@@ -1,0 +1,123 @@
+.container {
+  padding: 20px;
+  max-width: 1200px; // Ancho máximo para que no se estire demasiado en monitores grandes
+  margin: 0 auto;    // Centrado
+}
+
+.product-detail-card {
+  padding: 20px;
+}
+
+.detail-content {
+  display: flex;
+  flex-direction: column; // Por defecto (móvil) columna
+  gap: 30px;
+
+  // En pantallas medianas/grandes (Tablets/PC), usar fila
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+// --- SECCIÓN IMAGEN ---
+.image-section {
+  flex: 1; // Ocupa el 50% (o flexible)
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #fff; // Fondo blanco por si la imagen es transparente
+
+  img {
+    max-width: 100%;
+    max-height: 500px;
+    object-fit: contain; // Que se vea la imagen entera sin cortarse
+    border-radius: 8px;
+  }
+}
+
+// --- SECCIÓN INFO ---
+.info-section {
+  flex: 1; // Ocupa el otro 50%
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.category-label {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: #666;
+  letter-spacing: 1px;
+}
+
+.product-title {
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0;
+  color: #333;
+}
+
+.product-price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #3f51b5; // Color primary
+}
+
+.seller-text {
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.product-description {
+  h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+  }
+  p {
+    line-height: 1.6;
+    color: #444;
+  }
+}
+
+// --- ACCIONES DE COMPRA ---
+.purchase-actions {
+  margin-top: 10px;
+}
+
+.stock-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2e7d32; // Verde
+  font-weight: 500;
+  margin-bottom: 15px;
+
+  &.out-of-stock {
+    color: #d32f2f; // Rojo
+  }
+}
+
+.add-to-cart-row {
+  display: flex;
+  gap: 15px;
+  align-items: center; // Alinea verticalmente el input y el botón
+
+  .quantity-field {
+    width: 100px; // Ancho fijo pequeño para la cantidad
+    // Un pequeño hack para quitar el padding bottom extra de material fields
+    margin-bottom: -1.25em; 
+  }
+
+  .add-btn {
+    height: 56px; // Misma altura que el input outline de Material
+    font-size: 1rem;
+    padding: 0 30px;
+  }
+}
+
+.loading-container {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.2rem;
+  color: #666;
+}

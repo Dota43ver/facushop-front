@@ -1,0 +1,64 @@
+<div class="container" *ngIf="product$ | async as product; else loading">
+
+  <mat-card class="product-detail-card">
+    
+    <div class="detail-content">
+      
+      <div class="image-section">
+        <img [src]="product.imageUrl" [alt]="product.title">
+      </div>
+
+      <div class="info-section">
+        
+        <div class="category-label">{{ product.category.name }}</div>
+        
+        <h1 class="product-title">{{ product.title }}</h1>
+        
+        <div class="product-price">${{ product.price }}</div>
+
+        <p class="seller-text">
+          Vendido por: <strong>{{ product.seller.firstname }} {{ product.seller.lastname }}</strong>
+        </p>
+
+        <mat-divider></mat-divider>
+
+        <div class="product-description">
+          <h3>Descripción</h3>
+          <p>{{ product.description }}</p>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="purchase-actions">
+          
+          <div class="stock-status" [class.out-of-stock]="product.stock === 0">
+            <mat-icon>{{ product.stock > 0 ? 'check_circle' : 'cancel' }}</mat-icon>
+            <span>{{ product.stock > 0 ? 'Stock disponible: ' + product.stock : 'Sin Stock' }}</span>
+          </div>
+
+          <div class="add-to-cart-row" *ngIf="product.stock > 0">
+            
+            <mat-form-field appearance="outline" class="quantity-field">
+              <mat-label>Cantidad</mat-label>
+              <input matInput type="number" [(ngModel)]="quantity" min="1" [max]="product.stock">
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="add-btn" (click)="onAddToCart(product)">
+              <mat-icon>shopping_cart</mat-icon>
+              AÑADIR AL CARRITO
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </mat-card>
+
+</div>
+
+<ng-template #loading>
+  <div class="loading-container">
+    <p>Cargando detalles del producto...</p>
+  </div>
+</ng-template>

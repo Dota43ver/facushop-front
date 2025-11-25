@@ -1,0 +1,73 @@
+<div class="container">
+  <h1>Tu Carrito de Compras</h1>
+
+  <div *ngIf="cart$ | async as cart; else loading">
+
+    <div *ngIf="cart.items.length === 0" class="empty-cart">
+      <mat-icon class="empty-icon">production_quantity_limits</mat-icon>
+      <p>Tu carrito está vacío.</p>
+      <button mat-raised-button color="primary" routerLink="/products">
+        ¡Ir a Comprar!
+      </button>
+    </div>
+
+    <div *ngIf="cart.items.length > 0" class="cart-content">
+      
+      <div class="items-list">
+        <mat-card *ngFor="let item of cart.items" class="cart-item-card">
+          <div class="item-row">
+            
+            <img [src]="item.productImageUrl" [alt]="item.productTitle" class="item-image">
+            
+            <div class="item-details">
+              <h3>{{ item.productTitle }}</h3>
+              <span class="unit-price">Precio unitario: ${{ item.priceAtPurchase }}</span>
+            </div>
+
+            <div class="item-quantity">
+              <span class="label">Cant:</span>
+              <span class="value">{{ item.quantity }}</span>
+            </div>
+
+            <div class="item-subtotal">
+              ${{ item.subtotal }}
+            </div>
+
+            <button mat-icon-button color="warn" (click)="onRemoveItem(item.productId)" matTooltip="Eliminar">
+              <mat-icon>delete</mat-icon>
+            </button>
+
+          </div>
+        </mat-card>
+      </div>
+
+      <mat-card class="summary-card">
+        <mat-card-header>
+          <mat-card-title>Resumen del Pedido</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="summary-row">
+            <span>Productos ({{ cart.items.length }})</span>
+            <span>${{ cart.totalAmount }}</span>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span>${{ cart.totalAmount }}</span>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button color="primary" class="checkout-btn" (click)="onCheckout()">
+            PROCEDER AL PAGO
+          </button>
+        </mat-card-actions>
+      </mat-card>
+
+    </div>
+
+  </div>
+
+  <ng-template #loading>
+    <p class="loading-text">Cargando carrito...</p>
+  </ng-template>
+</div>

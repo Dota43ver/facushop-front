@@ -1,0 +1,32 @@
+<mat-toolbar color="primary">
+  
+  <a routerLink="/" class="navbar-brand">FacuShop</a>
+
+  <span class="spacer"></span>
+
+  <a mat-button routerLink="/products">Productos</a>
+
+  <ng-container *ngIf="!authService.isLoggedIn()">
+    <a mat-button routerLink="/login">Login</a>
+    <a mat-button routerLink="/register">Registro</a>
+  </ng-container>
+
+  <ng-container *ngIf="authService.isLoggedIn()">
+    <a mat-stroked-button routerLink="/products/create" style="margin-right: 15px; border-color: white; color: white;">
+    + Vender
+  </a>
+    <a mat-button routerLink="/cart">Carrito</a>
+    <a mat-button routerLink="/profile/orders">Mis Pedidos</a>
+    
+    <a mat-button (click)="onLogout()">Logout</a>
+  </ng-container>
+
+</mat-toolbar>
+
+<main style="padding: 20px;">
+  <router-outlet></router-outlet>
+</main>
+
+<footer style="background-color: #333; color: white; padding: 20px; text-align: center;">
+  <p>© 2025 FacuShop - Todos los derechos reservados.</p>
+</footer>
