@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AddItemRequest, CartResponseDto } from '../interfaces/cart.dto';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   
-  private apiUrl = '/api/cart'; // Gracias al proxy
+  private apiUrl = `${environment.apiUrl}/cart`;
 
   constructor(private http: HttpClient) { }
 

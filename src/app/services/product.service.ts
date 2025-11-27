@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductResponseDto } from '../interfaces/product.dto'; // <-- ¡Importá tu "molde"!
 import { CategoryDto } from '../interfaces/category.dto';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,8 @@ import { CategoryDto } from '../interfaces/category.dto';
 export class ProductService {
 
   // Esta es la URL base. Gracias al proxy, solo usamos /api
-  private apiUrl = '/api/products'; 
-  private categoriesUrl = '/api/categories';
+  private apiUrl = `${environment.apiUrl}/products`;
+  private categoriesUrl = `${environment.apiUrl}/categories`;
 
   // Inyectamos el HttpClient que configuramos en app.config.ts
   constructor(private http: HttpClient) { }

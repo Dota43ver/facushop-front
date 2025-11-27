@@ -1,5 +1,5 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withHashLocation } from '@angular/router';
 import { routes } from './app.routes';
 import { authInterceptor } from './interceptors/auth.interceptor';
 
@@ -10,10 +10,9 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
-    // --- MODIFICÁ ESTA LÍNEA ---
-    // Le decimos que provea el HttpClient Y que use nuestro interceptor
-    provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
-    provideAnimations()
-]
+    // Volvemos al router normal
+    provideRouter(routes), 
+    
+    provideHttpClient(withFetch(), withInterceptors([authInterceptor])) 
+  ]
 };

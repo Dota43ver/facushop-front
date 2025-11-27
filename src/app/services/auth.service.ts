@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { AuthResponse, LoginRequest } from '../interfaces/auth.dto';
 import { RegisterRequest } from '../interfaces/auth.dto';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl = '/api/auth'; // La URL base de autenticación (gracias al proxy)
+  private apiUrl = `${environment.apiUrl}/auth`;
   private readonly TOKEN_KEY = 'authToken'; // La "llave" para guardar el token
 
   constructor(

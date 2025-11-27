@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { OrderResponseDto } from '../interfaces/order.dto';
+import { environment } from '../../environments/environment';
 
 interface CheckoutResponse {
   checkoutUrl: string;
@@ -12,8 +13,8 @@ interface CheckoutResponse {
 })
 export class OrderService {
 
-  private apiUrl = '/api/orders'; // Gracias al proxy
-  private checkoutApiUrl = '/api/checkout';
+  private apiUrl = `${environment.apiUrl}/orders`;
+  private checkoutApiUrl = `${environment.apiUrl}/checkout`;
 
   constructor(private http: HttpClient) { }
 

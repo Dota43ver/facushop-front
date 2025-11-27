@@ -8,15 +8,18 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = authService.getToken(); // Obtenemos el token
 
   // Si no hay token, dejamos pasar la petición tal cual (ej. para Login)
-  if (!token) {
-    return next(req);
+  let headersConfig: any = {
+    'ngrok-skip-browser-warning': 'true' 
+  };
+
+
+  if (token) {
+    headersConfig['Authorization'] = `Bearer ${token}`;
   }
 
   // Si hay token, clonamos la petición y le añadimos la cabecera
   const authReq = req.clone({
-    setHeaders: {
-      Authorization: `Bearer ${token}`
-    }
+    setHeaders: headersConfig
   });
 
   // Dejamos pasar la petición clonada (con el token)
