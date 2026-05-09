@@ -19,6 +19,33 @@ export class AuthService {
     private router: Router
   ) { }
 
+  getRole(): string | null {
+  const token = this.getToken();
+  if (!token) return null;
+
+  try {
+    // El JWT tiene el formato: Header.Payload.Signature
+    // El payload es la segunda parte (índice 1)
+    const payloadBase64 = token.split('.')[1];
+    const payloadJson = window.atob(payloadBase64); // Decodifica Base64 a String
+    const decodedToken = JSON.parse(payloadJson);   // Convierte String a Objeto
+    
+    // Spring Boot suele guardar los roles en el campo 'authorities' o 'role'
+    // Si usaste la configuración estándar, suele ser decodedToken.role o decodedToken.authorities[0].authority
+    return decodedToken.role || null; 
+  } catch (e) {
+    console.error("Error decodificando el token", e);
+    return null;
+  }
+}
+
+/**
+ * Devuelve true solo si el usuario tiene rol ADMIN
+ */
+isAdmin(): boolean {
+  return this.getRole() === 'ADMIN';
+}
+
   /**
    * Envía los datos al backend para registrar un nuevo usuario.
    */

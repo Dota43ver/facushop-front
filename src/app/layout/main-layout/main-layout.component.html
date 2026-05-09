@@ -12,14 +12,18 @@
   </ng-container>
 
   <ng-container *ngIf="authService.isLoggedIn()">
-    <a mat-stroked-button routerLink="/products/create" style="margin-right: 15px; border-color: white; color: white;">
+  
+  <a mat-stroked-button 
+     *ngIf="authService.isAdmin()" 
+     routerLink="/products/create" 
+     style="margin-right: 15px; border-color: white; color: white;">
     + Vender
   </a>
-    <a mat-button routerLink="/cart">Carrito</a>
-    <a mat-button routerLink="/profile/orders">Mis Pedidos</a>
-    
-    <a mat-button (click)="onLogout()">Logout</a>
-  </ng-container>
+
+  <a mat-button routerLink="/cart">Carrito</a>
+  <a mat-button routerLink="/profile/orders">Mis Pedidos</a>
+  <a mat-button (click)="onLogout()">Logout</a>
+</ng-container>
 
 </mat-toolbar>
 
